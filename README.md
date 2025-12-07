@@ -1,48 +1,50 @@
-# zapret для Linux
-[README in English](https://github.com/ImMALWARE/zapret-linux-easy/blob/main/README_EN.md)
+# zapret для (можетбыть чего-то кроме) Arch Linux
+[оригинальный проект от ImMALWARE](https://github.com/ImMALWARE/zapret-linux-easy)
 
-1. Скачайте и распакуйте архив https://github.com/ImMALWARE/zapret-linux-easy/archive/refs/heads/main.zip (либо `git clone https://github.com/ImMALWARE/zapret-linux-easy && cd zapret-linux-easy`)
-2. **Убедитесь, что у вас установлены пакеты `curl`, `iptables` и `ipset` (для FWTYPE=iptables) или `curl` и `nftables` (для FWTYPE=nftables)! Если нет — установите. Если вы не знаете как, спросите у ChatGPT!**
-3. Откройте терминал в папке, куда архив был распакован
-4. `./install.sh`
+некоторые файлы взяты из [запрета для Windows от Flowseal](https://github.com/Flowseal/zapret-discord-youtube)
 
-# Управление
-## Systemd
-Остановка: `sudo systemctl stop zapret`
+должно быть линукс параллелью [запрета для Windows от Flowseal](https://github.com/Flowseal/zapret-discord-youtube)
 
-Запуск после остановки: `sudo systemctl start zapret`
+1. скачайте эту чтуку проекта какнибуть, вы наверное знаете как
+2. распакуйте
+3. запустите скрипт по установке
+4. ???
+5. запрет работает
 
-Отключение автозапуска (по умолчанию включен): `sudo systemctl disable zapret`
+## планы "проекта"
+- дать `configer.sh` норм название, доделать для пользователей кроме меня
+- сделать импортер стратегий для Windows (а именно стратегий от Flowseal) ато муторно будет
+- сделать поддержку для win-стратегий которые используют hostlist одновременно с теми которые используют hostlist и hostlist-google
+- стать ОЧНЬ популярным (ага щас)
+- ~связаться с Flowseal чтобы ???~
 
-Включение автозапуска: `sudo systemctl enable zapret`
-## OpenRC
+## Управление
+(в обоих случаях ипользуется `zapret`)
 
-Остановка: `sudo rc-service zapret stop`
+**Systemd** - работает, полу-автоматизирован с помощью `configer.sh` (рабочее название)
 
-Запуск после остановки: `sudo rc-service zapret start`
+**OpenRC** - наверное тоже работает
+## Списки доменов
+кастомные адресса пихаются в `hostlist.txt`
 
-Включение автозапуска: `sudo rc-update add zapret`
+если какимто боком чтото ломается пихайте адресс в `hostlist-exclude.txt`
 
-Отключение автозапуска: `sudo rc-update del zapret`
-# Списки доменов
-Не работает какой-то заблокированный сайт? Попробуйте добавить его домен в `/opt/zapret/autohosts.txt`
+конфиг можно изменить с помощью `configer.sh`, конфиги хранятся в `configs/`
 
-Не работает незаблокированный сайт? Добавьте его домен в `/opt/zapret/ignore.txt`
+## Переменные в config.txt
 
-Конфиг можно изменить в `/opt/zapret/config.txt` (перезапустите zapret после изменения)
+`{hosts}` — `hostlist.txt`
 
-Тип firewall-а можно изменить в `/opt/zapret/system/FWTYPE` (перезапустите zapret после изменения)
+`{hosts-exclude}` — `hostlist-exclude.txt`
 
-Для проверки текущего конфига вы можете использовать `/opt/zapret/check.sh`
+`{hosts-google}` — `hostlist-google.txt`
 
-# Переменные в config.txt
+`{hosts-all}` — ~`hostlist.txt` а также `hostlist-google.txt`~ покачто отдельный файл `hostlist-all.txt` (в общем счёте бесполезный)
 
-`{hosts}` — подставит путь к `autohosts.txt`
+`{ipset-all}` — `ipset-all.txt`
 
-`{ignore}` — подставит путь к `ignore.txt`
+`{ipset-exclude}` — `ipset-exclude.txt`
 
-`{youtube}` — подставить путь к `youtube.txt`
+`{google-quic}` — `system/quic_initial_www_google_com.bin`
 
-`{quicgoogle}` — подставит путь к `system/quic_initial_www_google_com.bin`
-
-`{tlsgoogle}` — подставит путь к `system/tls_clienthello_www_google_com.bin`
+`{google-tls}` — `system/tls_clienthello_www_google_com.bin`

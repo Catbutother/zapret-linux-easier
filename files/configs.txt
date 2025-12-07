@@ -1,0 +1,2 @@
+./configs/general_(ALT6).txt
+./configs/catstrat.txt
